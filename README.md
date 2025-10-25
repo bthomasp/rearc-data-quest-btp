@@ -1,29 +1,64 @@
-📊 Rearc Data Quest — Barry Petersen
+\# 📊 Rearc Data Quest — Barry Petersen
 
-Full data pipeline implementation
-Built using AWS, Databricks, Terraform, Lambda, SQS, and Python.
 
-🚀 Structure
-rearc_quest_submission/
+
+A concise, end-to-end data pipeline for the Rearc Quest using \*\*AWS (S3, Lambda, SQS)\*\*, \*\*Databricks\*\*, and \*\*Terraform\*\*.  
+
+Includes ingestion (BLS “pr” files), an API population snapshot, analytics, and IaC.
+
+
+
+---
+
+
+
+\## 🗂 Repository Structure
+
+
+
+```text
+
+rearc\_quest\_submission/
+
 ├── notebooks/
-│   ├── bls_landing.ipynb        # Parts 1 & 2 – Data ingestion + API integration
-│   └── analytics_part3.ipynb     # Part 3 – Analytics & joins
+
+│   ├── bls\_landing.ipynb              # Parts 1 \& 2 – ingest BLS + population API → S3
+
+│   └── analytics\_part3.ipynb          # Part 3 – analytics \& joins (mean/stddev, best year, join)
+
 │
+
 ├── terraform/
-│   ├── main.tf                   # Infrastructure deployment
+
+│   ├── main.tf                        # Infrastructure (Lambdas, SQS, wiring)
+
 │   ├── variables.tf
-│   ├── terraform.tfvars
+
+│   ├── terraform.tfvars               # Region/bucket/contact overrides
+
 │   └── lambda/
-│       ├── ingest_lambda.py
-│       └── reports_lambda.py
+
+│       ├── ingest\_lambda.py           # Part 1 \& 2 ingestion Lambda (idempotent)
+
+│       └── reports\_lambda.py          # Emits Part 3 summaries on new JSON arrival
+
 │
+
 ├── outputs/
-│   ├── mean_stddev_2013_2018.csv
-│   ├── best_year_per_series.csv
-│   └── prs30006032_q01_with_population.csv
+
+│   ├── mean\_stddev\_2013\_2018.csv
+
+│   ├── best\_year\_per\_series.csv
+
+│   └── prs30006032\_q01\_with\_population.csv
+
 │
-├── s3_links.txt
+
+├── s3\_links.txt                       # Handy S3 URIs / console links
+
 └── README.md
+
+
 
 ⚙️ Quickstart
 cd terraform
@@ -31,16 +66,18 @@ terraform init
 terraform apply -auto-approve
 
 
+
 Config (terraform.tfvars):
 
-aws_region   = "us-east-1"
-bucket_name  = "databricks-workspace-stack-e3d32-bucket"
-contact_email= "bthomasp@gmail.com"
+aws\_region   = "us-east-1"
+bucket\_name  = "databricks-workspace-stack-e3d32-bucket"
+contact\_email= "bthomasp@gmail.com"
+
 
 
 Validation:
 
-S3 contains /bls/pr/ and /bls/api/us_population_*.{json,csv}
+S3 contains /bls/pr/ and /bls/api/us\_population\_\*.{json,csv}
 
 CloudWatch Logs for rearc-quest-reports show 3a/3b/3c summaries
 
@@ -66,7 +103,7 @@ s3://databricks-workspace-stack-e3d32-bucket/bls/pr/
 
 s3://databricks-workspace-stack-e3d32-bucket/bls/api/
 
-s3://databricks-workspace-stack-e3d32-bucket/bls/api/us_population_csv/
+s3://databricks-workspace-stack-e3d32-bucket/bls/api/us\_population\_csv/
 
 📨 Author
 
@@ -74,3 +111,4 @@ Barry Petersen
 📧 bthomasp@gmail.com
 
 🔗 GitHub – bthomasp
+
