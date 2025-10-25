@@ -1,0 +1,16 @@
+# Rearc Quest – AWS S3 Data Locations (Barry Petersen)
+# Region: us-east-1
+# Bucket: databricks-workspace-stack-e3d32-bucket
+
+## Part 1 – BLS Source Files
+s3://databricks-workspace-stack-e3d32-bucket/bls/pr/
+
+## Part 2 – Population Snapshots
+s3://databricks-workspace-stack-e3d32-bucket/bls/api/us_population.json
+s3://databricks-workspace-stack-e3d32-bucket/bls/api/us_population_csv/us_population_2013_2018.csv
+s3://databricks-workspace-stack-e3d32-bucket/bls/api/us_population_datausa.json   # DataUSA snapshot
+
+## Part 3 – Analytics Outputs (also included locally in outputs/)
+s3://databricks-workspace-stack-e3d32-bucket/bls/mean_stddev_2013_2018.csv
+s3://databricks-workspace-stack-e3d32-bucket/bls/best_year_per_series.csv
+s3://databricks-workspace-stack-e3d32-bucket/bls/prs30006032_q01_with_population.csv
